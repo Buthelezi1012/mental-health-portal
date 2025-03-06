@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jane Doe"> <!-- Replace with your name -->
+    <title>Mental Health & Wellness Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Mental Health & Wellness Portal</h1>
+    </header>
+    <div class="container">
+        <section id="login-section">
+            <div id="employee-login">
+                <h2><i class="fas fa-user"></i> Employee Login</h2>
+                <form id="employee-login-form">
+                    <label for="emp-name" class="sr-only">Name and Surname</label>
+                    <input type="text" id="emp-name" placeholder="e.g., John Smith" required>
+                    <label for="emp-password" class="sr-only">Password</label>
+                    <input type="password" id="emp-password" placeholder="Enter your password" required>
+                    <button type="submit" aria-label="Log in as employee">Login</button>
+                </form>
+                <p id="emp-login-message"></p>
+            </div>
+            <div id="hr-login">
+                <h2><i class="fas fa-user-shield"></i> HR Login</h2>
+                <form id="hr-login-form">
+                    <label for="hr-username" class="sr-only">HR Username</label>
+                    <input type="text" id="hr-username" placeholder="HR Username" required>
+                    <label for="hr-password" class="sr-only">HR Password</label>
+                    <input type="password" id="hr-password" placeholder="HR Password" required>
+                    <button type="submit" aria-label="Log in as HR">Login</button>
+                </form>
+                <p id="hr-login-message"></p>
+            </div>
+        </section>
+        <main id="employee-main" style="display: none;">
+            <section id="stress-logging">
+                <h2><i class="fas fa-brain"></i> Log Your Stress</h2>
+                <form id="stress-form">
+                    <label for="stress-level">Stress Level (1-10):</label>
+                    <input type="range" id="stress-level" name="stress-level" min="1" max="10" value="5" aria-label="Stress level slider">
+                    <span id="stress-value">5</span>
+                    <label for="stress-notes">Notes (optional):</label>
+                    <textarea id="stress-notes" name="stress-notes" rows="3" aria-label="Additional stress notes"></textarea>
+                    <button type="submit" aria-label="Submit stress log">Submit</button>
+                </form>
+                <p id="stress-message"></p>
+                <p id="wellness-tip"></p>
+            </section>
+            <section id="resources">
+                <h2><i class="fas fa-book"></i> Mental Health Resources</h2>
+                <ul>
+                    <li><a href="https://www.youtube.com/watch?v=4pLUleLdwY4" target="_blank">5-Minute Meditation Video</a></li>
+                    <li><a href="https://www.mind.org.uk/information-support/tips-for-everyday-living/" target="_blank">Coping Tips Article</a></li>
+                    <li>Helpline: <strong>1-800-273-8255</strong> (National Suicide Prevention Lifeline)</li>
+                </ul>
+            </section>
+            <section id="hr-support">
+                <h2><i class="fas fa-headset"></i> Request HR Support</h2>
+                <form id="hr-form">
+                    <label for="urgency">Urgency:</label>
+                    <select id="urgency" name="urgency" aria-label="Request urgency">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <label for="contact-method">Preferred Contact:</label>
+                    <select id="contact-method" name="contact-method" aria-label="Preferred contact method">
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                    <label for="hr-notes">Details:</label>
+                    <textarea id="hr-notes" name="hr-notes" rows="3" aria-label="Support request details"></textarea>
+                    <button type="submit" aria-label="Send HR support request">Send Request</button>
+                </form>
+                <p id="hr-message"></p>
+                <h3>Your Requests</h3>
+                <ul id="hr-request-list"></ul>
+            </section>
+            <section id="stress-history">
+                <h2><i class="fas fa-history"></i> Stress Log History</h2>
+                <p id="weekly-summary"></p>
+                <table id="stress-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Stress Level</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stress-table-body"></tbody>
+                </table>
+                <button onclick="clearStressLogs()" aria-label="Clear all stress logs">Clear My Logs</button>
+                <button onclick="exportData()" aria-label="Export your data as JSON">Export My Data</button>
+            </section>
+            <section id="challenges">
+                <h2><i class="fas fa-trophy"></i> Wellness Challenges</h2>
+                <ul id="challenge-list">
+                    <li>Mindfulness (5 mins): <button onclick="completeChallenge('mindfulness', 10)" aria-label="Complete mindfulness challenge">Complete</button> <span id="mindfulness-status"></span></li>
+                    <li>Steps (5000): <button onclick="completeChallenge('steps', 15)" aria-label="Complete steps challenge">Complete</button> <span id="steps-status"></span></li>
+                    <li>Drink Water (8 glasses): <button onclick="completeChallenge('water', 5)" aria-label="Complete water challenge">Complete</button> <span id="water-status"></span></li>
+                </ul>
+                <p>Total Points: <span id="points">0</span></p>
+            </section>
+            <section id="leaderboard">
+                <h2><i class="fas fa-medal"></i> Team Wellness Leaderboard</h2>
+                <p>Resets every 1st of the month</p>
+                <ul id="leaderboard-list"></ul>
+            </section>
+            <section id="mood-forecast">
+                <h2><i class="fas fa-cloud-sun"></i> Mood Weather Forecast</h2>
+                <form id="mood-form">
+                    <label for="mood-select">How’s Your Mood Today?</label>
+                    <select id="mood-select" name="mood-select" aria-label="Select your current mood">
+                        <option value="sunny">Sunny 😊</option>
+                        <option value="cloudy">Cloudy 😐</option>
+                        <option value="stormy">Stormy 😣</option>
+                        <option value="rainy">Rainy 😢</option>
+                    </select>
+                    <label for="mood-note">Quick Note (optional):</label>
+                    <input type="text" id="mood-note" name="mood-note" maxlength="50" placeholder="e.g., Feeling great!">
+                    <button type="submit" aria-label="Submit your mood">Submit Mood</button>
+                </form>
+                <p id="mood-message"></p>
+                <div id="forecast-display">
+                    <h3>Workplace Mood Forecast</h3>
+                    <canvas id="moodChart" width="400" height="200" style="display: none;"></canvas>
+                    <p id="forecast-text"></p>
+                </div>
+            </section>
+            <button onclick="logout()" aria-label="Log out and return to login screen">Logout</button>
+        </main>
+        <main id="hr-main" style="display: none;">
+            <section id="hr-dashboard">
+                <h2><i class="fas fa-user-shield"></i> HR Dashboard</h2>
+                <div id="hr-mood-forecast">
+                    <h3><i class="fas fa-cloud-sun"></i> Workplace Mood Forecast</h3>
+                    <canvas id="hrMoodChart" width="400" height="200" style="display: none;"></canvas>
+                    <p id="hr-forecast-text"></p>
+                </div>
+                <h3>All Employee Stress Logs</h3>
+                <table id="hr-stress-table">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Time</th>
+                            <th>Stress Level</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hr-stress-table-body"></tbody>
+                </table>
+                <div id="employee-graph-request">
+                    <h3>View Individual Stress Graph</h3>
+                    <form id="graph-request-form">
+                        <label for="graph-employee-name">Employee Name:</label>
+                        <input type="text" id="graph-employee-name" placeholder="e.g., JohnSmith" required>
+                        <button type="submit" aria-label="View employee stress graph">View Graph</button>
+                    </form>
+                    <canvas id="employeeStressChart" width="400" height="200" style="display: none;"></canvas>
+                    <p id="graph-message"></p>
+                </div>
+                <button onclick="hrLogout()" aria-label="Log out and return to login screen">Logout</button>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>Created by Nqobile Buthelezi © 2025</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

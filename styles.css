@@ -1,0 +1,271 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 i {
+    margin-right: 10px;
+    color: #007BFF;
+}
+
+section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#login-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: center;
+}
+
+#employee-login, #hr-login {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+#employee-login-form, #hr-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#emp-name, #emp-password, #hr-username, #hr-password {
+    padding: 5px;
+    margin-right: 0;
+}
+
+#emp-login-message, #hr-login-message {
+    color: #d9534f;
+    margin-top: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #007BFF;
+}
+
+input, textarea {
+    padding: 5px;
+    transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin-top: 10px;
+    color: #28a745;
+}
+
+#stress-table, #hr-stress-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: block;
+}
+
+#stress-table th, #stress-table td, #hr-stress-table th, #hr-stress-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#stress-table th, #hr-stress-table th {
+    background-color: #007BFF;
+    color: white;
+}
+
+#stress-table tr:nth-child(even), #hr-stress-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#stress-table tr:hover, #hr-stress-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#weekly-summary {
+    font-weight: bold;
+    color: #555;
+}
+
+#hr-request-list li {
+    margin: 5px 0;
+    color: #555;
+}
+
+#mood-forecast, #hr-mood-forecast {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#mood-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#mood-note {
+    width: 100%;
+    max-width: 300px;
+}
+
+#forecast-display, #hr-mood-forecast {
+    margin-top: 20px;
+}
+
+#forecast-text, #hr-forecast-text {
+    font-style: italic;
+    color: #555;
+}
+
+#leaderboard {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#leaderboard-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+#leaderboard-list li:first-child {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+#leaderboard-list li:nth-child(2) {
+    color: #C0C0C0;
+}
+
+#leaderboard-list li:nth-child(3) {
+    color: #CD7F32;
+}
+
+#employee-graph-request {
+    margin-top: 20px;
+}
+
+#graph-request-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#graph-employee-name {
+    width: 200px;
+}
+
+#graph-message {
+    color: #d9534f;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    color: #555;
+    font-size: 14px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 600px) {
+    #stress-table, #hr-stress-table {
+        font-size: 14px;
+    }
+    section {
+        padding: 10px;
+    }
+    button {
+        padding: 8px;
+    }
+}
